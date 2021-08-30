@@ -1,10 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
+import { createStore, applyMiddleware } from 'redux';
+import { Reducer } from './src/redux/reducer';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
-const {Client} = require("iexjs");
-
-require('dotenv').config();
+const store = createStore(
+    Reducer,
+    composeWithDevTools(applyMiddleware(thunk))
+  );
 
 export default function App() {
   return (
